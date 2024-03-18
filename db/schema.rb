@@ -10,9 +10,34 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_18_135819) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_18_144547) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "ai_classes", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "nodes", force: :cascade do |t|
+    t.string "title"
+    t.text "content"
+    t.integer "parent_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "prompts", force: :cascade do |t|
+    t.text "prompt"
+    t.text "response_text"
+    t.bigint "ai_class_id", null: false
+    t.bigint "node_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["ai_class_id"], name: "index_prompts_on_ai_class_id"
+    t.index ["node_id"], name: "index_prompts_on_node_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -26,4 +51,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_18_135819) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "prompts", "ai_classes"
+  add_foreign_key "prompts", "nodes"
 end
