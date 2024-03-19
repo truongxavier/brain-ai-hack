@@ -3,7 +3,7 @@ class PromptsController < ApplicationController
     @node = Node.find(params[:node_id])
     @prompt = Prompt.new(prompt_params)
     @prompt.node = @node
-    @prompt.ai_class_id = 4
+    @prompt.ai_class = AiClass.first
     @node.title = params[:prompt]
     @node.save
     @prompt.response_text = 'réponse ia 1'
@@ -19,7 +19,7 @@ class PromptsController < ApplicationController
 
     @prompt = Prompt.new(prompt_params)
     @prompt.node = @node
-    @prompt.ai_class_id = 4
+    @prompt.ai_class = AiClass.first
     @prompt.response_text = 'réponse ia 2'
     if @prompt.save!
       NodeChannel.broadcast_to(
