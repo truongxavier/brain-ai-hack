@@ -7,4 +7,6 @@ pin "@hotwired/stimulus-loading", to: "stimulus-loading.js"
 pin_all_from "app/javascript/controllers", under: "controllers"
 pin "bootstrap", to: "bootstrap.min.js", preload: true
 pin "@popperjs/core", to: "popper.js", preload: true
+pin "vis-network" # @9.1.9
+pin "vis-data/peer/umd/vis-data.js", to: "vis-data--peer--umd--vis-data.js.js" # @7.1.9
 pin "@rails/actioncable", to: "@rails--actioncable.js" # @7.1.3
