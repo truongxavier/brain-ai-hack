@@ -1,0 +1,7 @@
+<div id="prompt-<%= prompt.id %>">
+  <small>
+    <strong><%= prompt.prompt %></strong>
+    <i><%= prompt.created_at.strftime("%a %b %e at %l:%M %p") %></i>
+  </small>
+  <p><%= prompt.response_text %></p>
+</div>
