@@ -1,0 +1,10 @@
+<div>
+  <h2>entrez votre prompt</h2>
+  <div class="d-flex" data-controller="node-subscription">
+    <%= simple_form_for [ node, prompt ],
+        html: { data: { action: "turbo:submit-end->node-subscription#resetForm" }, class: "d-flex" } do |f|  %>
+      <%= f.input :prompt, label:"prompt:" %>
+      <%= f.submit "envoyer vore prompt", class:"btn btn-primary" %>
+    <% end %>
+  </div>
+</div>

@@ -7,10 +7,11 @@ class NodesController < ApplicationController
 
   def create
     @node = Node.new(node_params)
+    @node.user = current_user
      if @node.save!
-      redirect_to nodes_path
+       redirect_to nodes_path
      else
-      render :index, status: :unprocessable_entity
+       render :index, status: :unprocessable_entity
      end
   end
 
