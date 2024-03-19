@@ -4,7 +4,8 @@ class PromptsController < ApplicationController
     @prompt = Prompt.new(prompt_params)
     @prompt.node = @node
     @prompt.ai_class_id = 4
-
+    @node.title = params[:prompt]
+    @node.save
     @prompt.response_text = 'réponse ia 1'
     if @prompt.save!
       NodeChannel.broadcast_to(

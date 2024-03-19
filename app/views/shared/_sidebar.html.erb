@@ -6,22 +6,23 @@
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">
       <li class="nav-item">
-        <a href="#" class="nav-link active" aria-current="page">
+        <%= link_to root_path do %>
           <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#home"></use></svg>
           Home
-        </a>
+        <% end %>
       </li>
       <li>
-        <a href="#" class="nav-link link-body-emphasis">
-          <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
-          prompt
-        </a>
+        <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
+        <%= simple_form_for [ node ] do |f|  %>
+          <%= f.input :title, as: :hidden %>
+          <%= f.submit "prompt" %>
+         <% end %>
       </li>
       <li>
-        <a href="#" class="nav-link link-body-emphasis">
+        <%= link_to nodes_path do %>
           <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#table"></use></svg>
           classement
-        </a>
+        <% end %>
       </li>
     </ul>
     <hr>

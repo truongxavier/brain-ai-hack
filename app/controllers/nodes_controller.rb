@@ -9,7 +9,7 @@ class NodesController < ApplicationController
     @node = Node.new(node_params)
     @node.user = current_user
      if @node.save!
-       redirect_to nodes_path
+       redirect_to node_path(@node)
      else
        render :index, status: :unprocessable_entity
      end
@@ -17,6 +17,7 @@ class NodesController < ApplicationController
 
   def show
     @prompt = Prompt.new
+    @nodenew = Node.new
   end
 
   def destroy

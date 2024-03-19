@@ -26,6 +26,14 @@ export default class extends Controller {
       edges: edges
     };
     const options = {};
-    new vis.Network(container, data, options);
+    var nodenetwork = new vis.Network(container, data, options);
+
+
+    nodenetwork.on("click", function (params) {
+      if (params.nodes.length > 0) {
+        var nodeId = params.nodes[0];
+        window.location.href = `/nodes/${nodeId}`;
+      }
+    });
   }
 }

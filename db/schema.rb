@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_18_144547) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_19_171106) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -26,6 +26,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_18_144547) do
     t.integer "parent_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_nodes_on_user_id"
   end
 
   create_table "prompts", force: :cascade do |t|
@@ -51,6 +53,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_18_144547) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "nodes", "users"
   add_foreign_key "prompts", "ai_classes"
   add_foreign_key "prompts", "nodes"
 end
