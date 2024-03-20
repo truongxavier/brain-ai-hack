@@ -4,7 +4,6 @@ import { Controller } from "@hotwired/stimulus"
 // Connects to data-controller="mindmap"
 export default class extends Controller {
   connect() {
-    console.log(this.element)
     const nodes = new vis.DataSet([
       {id: 1, label: 'Node 1'},
       {id: 2, label: 'Node 2'},
