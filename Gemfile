@@ -52,6 +52,11 @@ gem "simple_form", github: "heartcombo/simple_form"
 gem "sassc-rails"
 gem "cloudinary"
 gem "redis-rails"
+gem "ruby-openai"
+gem 'uri'
+gem 'json'
+gem 'net-http'
+
 
 group :development, :test do
   gem "dotenv-rails"
