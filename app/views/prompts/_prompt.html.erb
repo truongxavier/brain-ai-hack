@@ -3,5 +3,6 @@
     <strong><%= prompt.prompt %></strong>
     <i><%= prompt.created_at.strftime("%a %b %e at %l:%M %p") %></i>
   </small>
+  <h5><%= prompt.ai_class.name %> répond :</h5>
   <p><%= prompt.response_text %></p>
 </div>
