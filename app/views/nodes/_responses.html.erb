@@ -1,11 +1,11 @@
 <div class="container node"
   data-controller="node-subscription"
   data-node-subscription-node-id-value="<%= node.id %>">
-  <h1>#<%= node.title %></h1>
+  <h1><%= node.title %></h1>
 
-  <div class="prompts" data-node-subscription-target="prompts">
+  <div class="cards prompts" data-node-subscription-target="prompts">
     <% node.prompts.each do |prompt| %>
-      <%= render "prompts/prompt", prompt: prompt %>
+        <%= render "prompts/prompt", prompt: prompt %>
     <% end %>
   </div>
 </div>

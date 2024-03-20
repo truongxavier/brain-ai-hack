@@ -1,0 +1,46 @@
+.card {
+  overflow: hidden;
+  background-color: $fond;
+  box-shadow: 0 0 8px $purple;
+  width: 700px;
+  border-radius: 10px;
+  margin: 16px;
+  text-decoration: none;
+  color: white;
+  padding: 5px;
+}
+
+.card > img {
+  height: 80%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.card h2 {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.card p {
+  font-size: 18px;
+  opacity: .7;
+  margin: 0;
+}
+
+
+.card .card-infos {
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  position: relative;
+  background-color: $fond;
+}
+
+.card-infos .card-user {
+  position: absolute;
+  right: 16px;
+  top: -40px;
+  //  width: 40px;
+}

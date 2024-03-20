@@ -1,36 +1,38 @@
 class PromptsController < ApplicationController
+  attr_accessor :list_ia, :choix
+
   def create
-    @node = Node.find(params[:node_id])
-    @prompt = Prompt.new(prompt_params)
-    @prompt.node = @node
-    @prompt.ai_class = AiClass.find_by(name: "ChatGPT")
-    @node.title = params[:prompt]
-    @node.save
-    @prompt.response_text = call_chatgpt_result_text(@prompt)
-    if @prompt.save!
-      NodeChannel.broadcast_to(
-        @node,
-        render_to_string(partial: "prompt", locals: {prompt: @prompt})
-      )
-      head :ok
-    else
-      render "nodes/show", status: :unprocessable_entity
-    end
 
-    @prompt = Prompt.new(prompt_params)
-    @prompt.node = @node
-    @prompt.ai_class = AiClass.find_by(name: "MistralAi")
-    @prompt.response_text = call_mistralai_result_text(@prompt)
-    if @prompt.save!
-      NodeChannel.broadcast_to(
-        @node,
-        render_to_string(partial: "prompt", locals: {prompt: @prompt})
-      )
-      head :ok
+    if params[:prompt][:non_model_field][:choix] == "texte"
+      params[:prompt][:non_model_field][:list_ia].each do |ianame|
+        if ianame != ""
+          @node = Node.find(params[:node_id])
+          @prompt = Prompt.new(prompt_params)
+          @prompt.node = @node
+          @prompt.ai_class = AiClass.find_by(name: ianame)
+          if @node.title == ""
+            @node.title = params[:prompt][:prompt]
+            @node.save
+          end
+          if ianame == "ChatGPT"
+            @prompt.response_text = call_chatgpt_result_text(@prompt)
+          else
+            @prompt.response_text = call_mistralai_result_text(@prompt)
+          end
+          if @prompt.save!
+            NodeChannel.broadcast_to(
+              @node,
+              render_to_string(partial: "prompt", locals: {prompt: @prompt})
+            )
+            head :ok
+          else
+            render "nodes/show", status: :unprocessable_entity
+          end
+        end
+      end
     else
-      render "nodes/show", status: :unprocessable_entity
+      # TODO pour les images
     end
-
   end
 
   private

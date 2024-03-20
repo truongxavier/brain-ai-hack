@@ -2,15 +2,12 @@
   <%= render 'shared/sidebar', node: @nodenew %>
 
   <div>
-    <h1>Nodes#show</h1>
-    <p>Find me in app/views/nodes/show.html.erb</p>
-
-    <div>
-      <div class="responses">
+    <div style="position: relative; height: 100%;">
+      <div class="responses" >
         <%= render 'nodes/responses',  node: @node %>
       </div>
 
-      <div class="input_prompt">
+      <div class="input-prompt">
         <%= render 'prompts/prompt_input',  node: @node, prompt: @prompt %>
       </div>
     </div>
