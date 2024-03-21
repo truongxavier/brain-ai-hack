@@ -14,12 +14,15 @@ class NodesController < ApplicationController
           @visnode.push({ id: prompt.id,
                           label: "#{prompt.ai_class.name} répond #{prompt.response_text.slice(0, 100)}".gsub(/(.{1,50})/, "\\1\n").chomp,
                           title: prompt.response_text,
-                          shape: "ellipse" })
+                          shape: "ellipse",
+                          font: '12px' })
         else
           @visnode.push({ id: prompt.id,
-                          label: "#{prompt.ai_class.name} répond par une image",
+                          label: "#{prompt.ai_class.name} répond à \n #{prompt.prompt}",
                           image: "https://res.cloudinary.com/dk7qaea1j/image/upload/v1711038177/development/#{prompt.response_image.key}.png",
-                          shape: "image" })
+                          shape: "image",
+                          size: 100,
+                          font: '12px' })
         end
         @visedge.push({ from: node.id, to: prompt.id })
       end
