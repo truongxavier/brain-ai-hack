@@ -1,6 +1,6 @@
-<div class="container form-prompt">
+<div class="container form-prompt" >
   <%= simple_form_for [ node, prompt ],
-        html: { data: { action: "turbo:submit-end->node-subscription#resetForm" } } do |f|  %>
+        html: { data: { action: "turbo:submit-end->node-subscription#resetForm", scroll_prompt_target:"input" } } do |f|  %>
     <div class="row d-flex">
       <%= f.simple_fields_for :non_model_field do |nmf| %>
         <div class="col-6">
@@ -30,7 +30,7 @@
         <%= f.input :prompt,label: false %>
       </div>
       <div class="col-4">
-        <%= f.submit "envoyer votre prompt", class:"btn btn-primary" %>
+        <%= f.submit "envoyer votre prompt", class:"btn btn-primary"%>
       </div>
     </div>
   <% end %>
