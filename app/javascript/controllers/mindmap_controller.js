@@ -23,6 +23,7 @@ export default class extends Controller {
       nodes:{
         color: '#64145e',
         fixed: false,
+        physics: true,
         font: '16px arial white',
         shape: 'box',
         scaling: {
