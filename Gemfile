@@ -56,6 +56,7 @@ gem "ruby-openai"
 gem 'uri'
 gem 'json'
 gem 'net-http'
+gem "open-uri"
 
 
 group :development, :test do

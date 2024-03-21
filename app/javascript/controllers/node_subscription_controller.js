@@ -26,7 +26,11 @@ export default class extends Controller {
 
   #insertPromptAndScrollDown(data) {
     this.promptsTarget.insertAdjacentHTML("beforeend", data)
-    this.promptsTarget.scrollTo(0, this.promptsTarget.scrollHeight)
+    this.#donw()
+    // window.scrollTo(0, document.body.scrollHeight)
   }
 
+  #donw() {
+    window.scrollTo(0, 20000)
+  }
 }
