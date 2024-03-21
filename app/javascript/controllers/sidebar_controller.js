@@ -12,10 +12,13 @@ export default class extends Controller {
     if (this.miniValue) {
       console.log("opening sidebar");
       this.element.style.width = "250px";
+      this.element.parentElement.style.marginLeft = "255px";
     } else {
       console.log("closing sidebar");
       this.element.style.width = "80px";
-   };
+      this.element.parentElement.style.marginLeft = "85px";
+    };
+
   };
   mouse (event) {
     console.log(event)
