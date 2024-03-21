@@ -1,8 +1,11 @@
-<div class="card" id="prompt-<%= prompt.id %>">
+<div class="card" data-scroll-prompt-target="response" id="prompt-<%= prompt.id %>">
   <small>
     <strong><%= prompt.prompt %></strong>
     <i><%= prompt.created_at.strftime("%a %b %e at %l:%M %p") %></i>
   </small>
   <h5><%= prompt.ai_class.name %> répond :</h5>
   <p><%= prompt.response_text %></p>
+  <% if prompt.response_image.attached? %>
+    <%= cl_image_tag prompt.response_image.key, height: 300, width: 400, crop: :fill %>
+  <% end %>
 </div>

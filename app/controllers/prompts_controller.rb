@@ -31,7 +31,34 @@ class PromptsController < ApplicationController
         end
       end
     else
-      # TODO pour les images
+      params[:prompt][:non_model_field][:list_ia].each do |ianame|
+        if ianame != ""
+          @node = Node.find(params[:node_id])
+          @prompt = Prompt.new(prompt_params)
+          @prompt.node = @node
+          @prompt.ai_class = AiClass.find_by(name: ianame)
+          if @node.title == ""
+            @node.title = params[:prompt][:prompt]
+            @node.save
+          end
+          if ianame == "ChatGPT"
+            file = URI.open(prompt_image_chat_gpt(@prompt))
+            @prompt.response_image.attach(io: file, filename: "#{params[:prompt][:prompt].gsub(" ","")}.png", content_type: "image/png")
+            @prompt.save
+          else
+            # Todo
+          end
+          if @prompt.save!
+            NodeChannel.broadcast_to(
+              @node,
+              render_to_string(partial: "prompt", locals: {prompt: @prompt})
+            )
+            head :ok
+          else
+            render "nodes/show", status: :unprocessable_entity
+          end
+        end
+      end
     end
   end
 
@@ -44,6 +71,14 @@ class PromptsController < ApplicationController
       messages: [{ role: "user", content: "#{prompt.prompt}"}]
     })
     chaptgpt_response["choices"][0]["message"]["content"]
+  end
+
+  def prompt_image_chat_gpt(prompt)
+    client = OpenAI::Client.new
+    response = client.images.generate(parameters: {
+      model: "dall-e-3",
+      prompt: prompt.prompt })
+    response.dig("data", 0, "url")
   end
 
   def call_mistralai_result_text(prompt)
