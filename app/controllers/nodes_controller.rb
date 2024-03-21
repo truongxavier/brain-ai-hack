@@ -6,12 +6,22 @@ class NodesController < ApplicationController
     @visnode = []
     @visedge = []
     @nodes.each do |node|
-      @visnode.push({ id: node.id, label: node.title })
+      @visnode.push({ id: node.id,
+                      label: node.title.gsub(/(.{1,50})/, "\\1\n").chomp,
+                      shape: "box" })
       node.prompts.each do |prompt|
-        @visnode.push({ id: prompt.id,
-                        label: "#{prompt.ai_class.name} répond #{prompt.response_text.slice(0,100)}",
-                        title: prompt.response_text})
-        @visedge.push({from: node.id, to: prompt.id})
+        if prompt.response_text
+          @visnode.push({ id: prompt.id,
+                          label: "#{prompt.ai_class.name} répond #{prompt.response_text.slice(0, 100)}".gsub(/(.{1,50})/, "\\1\n").chomp,
+                          title: prompt.response_text,
+                          shape: "ellipse" })
+        else
+          @visnode.push({ id: prompt.id,
+                          label: "#{prompt.ai_class.name} répond par une image",
+                          image: "https://res.cloudinary.com/dk7qaea1j/image/upload/v1711038177/development/#{prompt.response_image.key}.png",
+                          shape: "image" })
+        end
+        @visedge.push({ from: node.id, to: prompt.id })
       end
     end
   end
