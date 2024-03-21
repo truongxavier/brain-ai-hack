@@ -3,28 +3,48 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="mindmap"
 export default class extends Controller {
+  static values = { node: Array, edge: Array }
+
   connect() {
-    const nodes = new vis.DataSet([
-      {id: 1, label: 'Node 1'},
-      {id: 2, label: 'Node 2'},
-      {id: 3, label: 'Node 3'},
-      {id: 4, label: 'Node 4'},
-      {id: 5, label: 'Node 5'}
-    ]);
-
-    const edges = new vis.DataSet([
-      {from: 1, to: 3},
-      {from: 1, to: 2},
-      {from: 2, to: 4},
-      {from: 2, to: 5}
-    ]);
-
+    const nodes = new vis.DataSet(this.nodeValue);
+    const edges = new vis.DataSet(this.edgeValue);
     const container = this.element;
     const data = {
       nodes: nodes,
       edges: edges
     };
-    const options = {};
+    const options = {
+      // configure: {
+      //   enabled: true,
+      //   filter: 'nodes,edges',
+      //   container: undefined,
+      //   showButton: true
+      // },
+      nodes:{
+        color: '#64145e',
+        fixed: false,
+        font: '16px arial white',
+        shape: 'box',
+        scaling: {
+          label: true
+        },
+        shadow: true
+      },
+      manipulation: {
+        enabled: false,
+        initiallyActive: false,
+        addNode: true,
+        addEdge: true,
+        editNode: undefined,
+        editEdge: true,
+        deleteNode: true,
+        deleteEdge: true,
+        controlNodeStyle:{
+          // all node options are valid.
+        }
+      }
+    }
+
     var nodenetwork = new vis.Network(container, data, options);
 
 

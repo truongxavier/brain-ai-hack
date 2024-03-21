@@ -1,8 +1,7 @@
 <div class="d-flex">
   <%= render 'shared/sidebar' ,node: @node %>
   <div>
-    <h1>Nodes#index</h1>
-    <p>Find me in app/views/nodes/index.html.erb</p>
+    <h1>Mon classement</h1>
+    <%= render 'nodes/mindmap',visnode: @visnode, visedge: @visedge %>
   </div>
-  <%= render 'nodes/mindmap' %>
 </div>

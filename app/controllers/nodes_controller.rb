@@ -3,6 +3,17 @@ class NodesController < ApplicationController
   def index
     @nodes = Node.all
     @node = Node.new
+    @visnode = []
+    @visedge = []
+    @nodes.each do |node|
+      @visnode.push({ id: node.id, label: node.title })
+      node.prompts.each do |prompt|
+        @visnode.push({ id: prompt.id,
+                        label: "#{prompt.ai_class.name} répond #{prompt.response_text.slice(0,100)}",
+                        title: prompt.response_text})
+        @visedge.push({from: node.id, to: prompt.id})
+      end
+    end
   end
 
   def create
