@@ -7,4 +7,22 @@
 @import "card";
 @import "form";
 @import "sidebar";
+@import "banner";
+
+body{
+  height: 100vh;
+  background: $fond;
+  color: white;
+  font-family: "__Inter_aaf875", "__Inter_Fallback_aaf875";
+}
+
+.node {
+  margin-left: 85px;
+  transition: 0.5s;
+}
+
+.btn {
+  border-radius: 25px;
+}
+
 @import "mindmap";

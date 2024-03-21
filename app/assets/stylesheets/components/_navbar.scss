@@ -1,6 +1,9 @@
 .navbar-lewagon {
   justify-content: space-between;
-  background: $fond;
+  background: rgb(102,20,95);
+  background: linear-gradient(355deg, rgba(102, 20, 95, 1) 0%, rgba(2,0,36,1) 20%);
+  color: white;
+  font-family: "__Inter_aaf875", "__Inter_Fallback_aaf875";
 }
 
 .navbar-lewagon .navbar-collapse {
