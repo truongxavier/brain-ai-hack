@@ -68,9 +68,10 @@ export default class extends Controller {
         },
         forceAtlas2Based: {
           gravitationalConstant: -1500,
-          centralGravity: 0.0010,
+          centralGravity: 0.0005,
           springLength: 500,
           springConstant: 0.18,
+          avoidOverlap: 1,
         },
         maxVelocity: 146,
         solver: "forceAtlas2Based",
