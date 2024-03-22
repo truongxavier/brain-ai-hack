@@ -7,25 +7,26 @@ class NodesController < ApplicationController
     @visedge = []
     @nodes.each do |node|
       @visnode.push({ id: node.id,
-                      label: ajouter_saut_ligne_tous_les_n_mots(node.title.slice(0, 50),5),
+                      label: ajouter_saut_ligne_tous_les_n_mots(garder_les_n_mots(node.title,15),5),
                       title: ajouter_saut_ligne_tous_les_n_mots(node.title, 20),
                       shape: "box",
                       level: 0 })
       node.prompts.each do |prompt|
         if prompt.response_text
           @visnode.push({ id: prompt.id,
-                          label: "#{prompt.ai_class.name} répond \n #{ajouter_saut_ligne_tous_les_n_mots(prompt.response_text.slice(0, 100),5)}",
+                          label: "#{prompt.ai_class.name} répond \n #{ajouter_saut_ligne_tous_les_n_mots(garder_les_n_mots(prompt.response_text, 15),5)}",
                           title: prompt.response_text,
                           shape: "ellipse",
                           font: '12px',
                           level: 3 })
         else
           @visnode.push({ id: prompt.id,
-                          label: "#{prompt.ai_class.name} répond à \n #{ajouter_saut_ligne_tous_les_n_mots(prompt.prompt.slice(0, 100),5)}",
+                          label: "#{prompt.ai_class.name} répond à \n #{ajouter_saut_ligne_tous_les_n_mots(garder_les_n_mots(prompt.prompt,15),5)}",
                           image: "#{ENV['CLOUDINARY_LINK']}#{prompt.response_image.key}.png",
                           shape: "image",
                           size: 100,
                           font: '12px',
+                          title: ajouter_saut_ligne_tous_les_n_mots(prompt.prompt,20),
                           level: 3 })
         end
         @visedge.push({ from: node.id, to: prompt.id })
@@ -74,6 +75,10 @@ class NodesController < ApplicationController
   def ajouter_saut_ligne_tous_les_n_mots(chaine, number)
     mots = chaine.split(' ')
     mots.each_slice(number).map { |slice| slice.join(' ') }.join("\n")
+  end
+
+  def garder_les_n_mots(chaine, number)
+    chaine.split.take(number).join(' ')
   end
 
 end
