@@ -1,0 +1,30 @@
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100px;
+  width: 100%;
+  padding: 0px 50px;
+  color: $white;
+  text-shadow: 1px 1px 16px $purple;
+  background: rgb(102,20,95);
+  background: linear-gradient(355deg, rgba(102, 20, 95, 1) 0%, rgba(2,0,36,1) 20%);
+}
+.footer-links {
+  display: flex;
+  align-items: center;
+}
+.footer-links a {
+  color: lighten($purple,35%);
+  opacity: 0.5;
+  text-decoration: none;
+  font-size: 24px;
+  padding: 0px 10px;
+}
+.footer-links a:hover {
+  opacity: 1;
+  color: lighten($purple,50%);
+}
+.footer .fa-heart {
+  color:lighten($purple,35%);
+}
