@@ -15,3 +15,4 @@ AiClass.destroy_all
 AiClass.create(name: "ChatGPT")
 AiClass.create(name: "Dezgo")
 AiClass.create(name: "MistralAi")
+AiClass.create(name: "DeepAi")
