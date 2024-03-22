@@ -53,7 +53,6 @@ gem "sassc-rails"
 gem "cloudinary"
 gem "redis-rails"
 gem "ruby-openai"
-gem 'uri'
 gem 'json'
 gem 'net-http'
 gem "open-uri"

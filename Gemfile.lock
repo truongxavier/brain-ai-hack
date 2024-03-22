@@ -381,7 +381,6 @@ DEPENDENCIES
   stimulus-rails
   turbo-rails
   tzinfo-data
-  uri
   web-console
 
 RUBY VERSION
