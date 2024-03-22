@@ -1,3 +1,7 @@
+require 'json'
+require 'net/http'
+require "uri"
+
 class PromptsController < ApplicationController
   attr_accessor :list_ia, :choix
 

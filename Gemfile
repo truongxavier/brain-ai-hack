@@ -53,9 +53,7 @@ gem "sassc-rails"
 gem "cloudinary"
 gem "redis-rails"
 gem "ruby-openai"
-gem 'json'
-gem 'net-http'
-gem "open-uri"
+
 
 
 group :development, :test do
