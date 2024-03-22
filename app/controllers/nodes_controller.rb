@@ -7,19 +7,25 @@ class NodesController < ApplicationController
     @visedge = []
     @nodes.each do |node|
       @visnode.push({ id: node.id,
-                      label: node.title.gsub(/(.{1,50})/, "\\1\n").chomp,
-                      shape: "box" })
+                      label: ajouter_saut_ligne_tous_les_n_mots(node.title),
+                      shape: "box",
+                      level: 0 })
       node.prompts.each do |prompt|
         if prompt.response_text
           @visnode.push({ id: prompt.id,
-                          label: "#{prompt.ai_class.name} répond #{prompt.response_text.slice(0, 100)}".gsub(/(.{1,50})/, "\\1\n").chomp,
+                          label: "#{prompt.ai_class.name} répond \n #{ajouter_saut_ligne_tous_les_n_mots(prompt.response_text.slice(0, 100))}",
                           title: prompt.response_text,
-                          shape: "ellipse" })
+                          shape: "ellipse",
+                          font: '12px',
+                          level: 3 })
         else
           @visnode.push({ id: prompt.id,
-                          label: "#{prompt.ai_class.name} répond par une image",
+                          label: "#{prompt.ai_class.name} répond à \n #{ajouter_saut_ligne_tous_les_n_mots(prompt.prompt)}",
                           image: "https://res.cloudinary.com/dk7qaea1j/image/upload/v1711038177/development/#{prompt.response_image.key}.png",
-                          shape: "image" })
+                          shape: "image",
+                          size: 100,
+                          font: '12px',
+                          level: 3 })
         end
         @visedge.push({ from: node.id, to: prompt.id })
       end
@@ -63,4 +69,10 @@ class NodesController < ApplicationController
   def node_params
     params.require(:node).permit(:title, :content)
   end
+
+  def ajouter_saut_ligne_tous_les_n_mots(chaine)
+    mots = chaine.split(' ')
+    mots.each_slice(5).map { |slice| slice.join(' ') }.join("\n")
+  end
+
 end
