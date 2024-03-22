@@ -21,7 +21,7 @@ class NodesController < ApplicationController
         else
           @visnode.push({ id: prompt.id,
                           label: "#{prompt.ai_class.name} répond à \n #{ajouter_saut_ligne_tous_les_n_mots(prompt.prompt)}",
-                          image: "https://res.cloudinary.com/dk7qaea1j/image/upload/v1711038177/development/#{prompt.response_image.key}.png",
+                          image: "#{ENV['CLOUDINARY_LINK']}#{prompt.response_image.key}.png",
                           shape: "image",
                           size: 100,
                           font: '12px',
