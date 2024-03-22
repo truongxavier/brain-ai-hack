@@ -6,13 +6,13 @@
   </div>
   <div class="icondiv">
     <%= simple_form_for [ node ] do |f|  %>
-        <%= f.input :title, as: :hidden %>
-        <div class="submit">
+      <%= f.input :title, as: :hidden %>
+      <div class="submit">
         <%= button_to type: "submit" do  %>
           <i class="fa-solid fa-terminal"></i>Prompt
         <% end %>
-        </div>
-        <% end %>
+      </div>
+    <% end %>
   </div>
   <br>
   <div class="icondiv">
@@ -21,4 +21,3 @@
     <% end %>
   </div>
 </div>
-
