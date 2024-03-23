@@ -37,11 +37,11 @@ class NodesController < ApplicationController
   def create
     @node = Node.new(node_params)
     @node.user = current_user
-     if @node.save!
-       redirect_to node_path(@node)
-     else
-       render :index, status: :unprocessable_entity
-     end
+    if @node.save!
+      redirect_to node_path(@node)
+    else
+      render :index, status: :unprocessable_entity
+    end
   end
 
   def show
@@ -80,5 +80,4 @@ class NodesController < ApplicationController
   def garder_les_n_mots(chaine, number)
     chaine.split.take(number).join(' ')
   end
-
 end
