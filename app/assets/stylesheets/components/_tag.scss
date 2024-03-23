@@ -1,0 +1,29 @@
+.tag-item {
+  display: inline-block;
+}
+
+.tag-selector {
+  position: absolute;
+  transform: scale(0);
+}
+
+.tag-selector + label {
+  cursor: pointer;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 50rem;
+  padding: 0.1rem 0.5rem;
+  background-color: lighten($fond, 2%);
+  color: white;
+  box-shadow: 0 0 8px $purple;
+  margin-right: 0.6rem;
+  margin-bottom: 0.4rem;
+  padding: 5px;
+  width: 70px;
+  text-align: center;
+}
+
+.tag-selector:checked + label {
+  background-color:rgb(100, 20, 94);
+  color: white;
+}

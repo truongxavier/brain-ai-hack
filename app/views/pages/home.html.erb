@@ -7,8 +7,12 @@
        et de les relier entre eux pour créer des mindmaps visuelles et intelligentes</p>
       <a class="btn btn-flat btn-primary" href="/nodes">testez vos idées!</a>
     </div>
-    <div>
-      <%= render 'prompts/submarine' %>
+    <div class="sousmarin "
+      data-controller="sousmarin"
+      data-action="mouseover->sousmarin#anime">
+      <div class="magictimerapid" data-sousmarin-target="render">
+        <%= render 'prompts/submarine'%>
+      </div>
     </div>
   </div>
 </div>

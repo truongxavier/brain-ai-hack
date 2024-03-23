@@ -1,9 +1,9 @@
 <div class="container form-prompt" >
   <%= simple_form_for [ node, prompt ],
-        html: { data: { action: "turbo:submit-end->node-subscription#resetForm", scroll_prompt_target:"input" } } do |f|  %>
+        html: { data: { action: "turbo:submit-end->node-subscription#resetForm" } } do |f|  %>
     <div class="row d-flex">
       <%= f.simple_fields_for :non_model_field do |nmf| %>
-        <div class="col-6">
+        <div class="col-3">
           <%= nmf.input :choix,
               label: "Choix du type de résultat",
               as: :string,
@@ -12,25 +12,30 @@
               item_wrapper_class: 'tag-item',
               collection: ["image","texte"] %>
         </div>
-        <div class="col-6">
+        <div class="col-9">
           <%= nmf.input :list_ia,
               label: "Choix d'une ou plusieurs IA",
               as: :string,
               as: :check_boxes,
               collection_wrapper_tag: 'div',
               collection_wrapper_class: 'category-wrapper',
-              item_wrapper_class: 'category-item',
               input_html: {class: 'category-selector'},
               collection: ["ChatGPT","MistralAi","Dezgo","DeepAi"] %>
         </div>
       <% end %>
     </div>
     <div class="row d-flex">
-      <div class="col-8">
-        <%= f.input :prompt,label: false %>
+      <div class="col-11">
+        <%= f.input :prompt,
+              label: false,
+              input_html: {class: 'prompt-text', data: { node_subscription_target: "zone", action: "node-subscription#resize" }} %>
       </div>
-      <div class="col-4">
-        <%= f.submit "envoyer votre prompt", class:"btn btn-primary"%>
+      <div class="col-1 submit">
+        <%= button_to "", type: "submit",
+             data: { action: "node-subscription#research" } do %>
+          <i class="fa-solid fa-arrow-right"></i>
+        <% end %>
+
       </div>
     </div>
   <% end %>

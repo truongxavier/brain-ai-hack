@@ -4,7 +4,7 @@ import { createConsumer } from "@rails/actioncable"
 // Connects to data-controller="node-subscription"
 export default class extends Controller {
   static values = { nodeId: Number }
-  static targets = ["prompts"]
+  static targets = ["prompts", "patience", "zone"]
 
   connect() {
     console.log(this.element)
@@ -13,15 +13,31 @@ export default class extends Controller {
       { channel: "NodeChannel", id: this.nodeIdValue },
       { received: data => this.#insertPromptAndScrollDown(data) }
     )
+    this.zoneTarget.addEventListener('input', this.resize)
   }
 
   resetForm(event) {
+    this.patienceTarget.classList.add("d-none")
+    this.patienceTarget.classList.remove("tinRightOut")
     event.target.reset()
+  }
+
+  research(event) {
+    this.patienceTarget.classList.remove("d-none")
+    this.patienceTarget.classList.add("tinRightOut")
+    this.#donw()
+  }
+
+  resize = () => {
+    this.zoneTarget.style.height = 'auto'
+    this.zoneTarget.style.height = `${this.zoneTarget.scrollHeight}px`
+    this.#donw()
   }
 
   disconnect() {
     console.log("Unsubscribed from the node")
     this.channel.unsubscribe()
+    this.zoneTarget.removeEventListener('input', this.resize)
   }
 
   #insertPromptAndScrollDown(data) {

@@ -1,17 +1,21 @@
-
-
 <div class="d-flex show-node node">
   <%= render 'shared/sidebar', node: @nodenew %>
 
-  <div data-controller="scroll-prompt">
-    <div >
-      <div class="responses" data-scroll-prompt-target="insert">
-        <%= render 'nodes/responses',  node: @node %>
-      </div>
+  <div class="container node"
+        data-controller="node-subscription"
+        data-node-subscription-node-id-value="<%= @node.id %>">
+    <h1><%= @node.title %></h1>
 
-      <div class="input-prompt">
-        <%= render 'prompts/prompt_input',  node: @node, prompt: @prompt %>
-      </div>
+    <div class="cards prompts" data-node-subscription-target="prompts">
+      <% @node.prompts.each do |prompt| %>
+          <%= render "prompts/prompt", prompt: prompt %>
+      <% end %>
+    </div>
+    <div class="patience magictime d-none" data-node-subscription-target="patience">
+      <%= render 'prompts/submarine' %>
+    </div>
+    <div class="input-prompt">
+      <%= render 'prompts/prompt_input',  node: @node, prompt: @prompt, nodenew: @nodenew %>
     </div>
   </div>
 </div>
