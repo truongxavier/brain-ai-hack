@@ -60,6 +60,10 @@ group :development, :test do
   gem "dotenv-rails"
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri windows ]
+  gem 'memory_profiler'
+  gem 'derailed_benchmarks'
+  gem 'stackprof'
+  gem 'mime-types', [ '~> 2.6', '>= 2.6.1' ], require: 'mime/types/columnar'
 end
 
 group :development do
