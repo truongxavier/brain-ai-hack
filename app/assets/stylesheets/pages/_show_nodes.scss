@@ -1,18 +1,51 @@
 .show-node {
-  position: absolute;
+  flex-direction: column;
+   height: 100%;
+  overflow: visible;
+
+  .node {
+   height: 100%;
+  }
 }
 
 .input-prompt {
-  // position: relative;
-  // bottom: 0;
-  justify-content: center;
+  position: fixed !important;
+  bottom: 0 !important;
+  margin-left: 400px;
+  padding-bottom: 5px !important;
 }
+
 .form-prompt{
   width: 800px;
   box-shadow: 0 0 8px $purple;
   border: rgb(100, 20, 94);
   border-radius: 10px;
   margin: 20px auto  20px auto;
+  background-color: $fond !important;
+
+  .submit {
+    padding: 5px 5px 5px 5px;
+    text-decoration: none;
+    font-size: 20px;
+    color: $purple;
+    display: block;
+    button {
+      background-color: transparent;
+      border: none;
+      color: $purple;
+      font-size: 30px;
+      cursor: pointer;
+
+      &:hover {
+        color: lighten($purple, 10%);
+
+      }
+    }
+  }
+}
+
+.patience {
+  padding: 290px;
 }
 
 .prompt-text {
@@ -21,25 +54,4 @@
   margin: 10px;
   background-color: lighten($fond, 2%)!important;
   border: none !important;
-}
-
-.form-prompt .submit {
-  padding: 5px 5px 5px 5px;
-  text-decoration: none;
-  font-size: 20px;
-  color: $purple;
-  display: block;
-  button {
-    background-color: transparent;
-    border: none;
-    color: $purple;
-    font-size: 30px;
-    cursor: pointer;
-
-    &:hover {
-      color: lighten($purple, 10%);
-
-    }
-  }
-
 }

@@ -2,12 +2,27 @@
   overflow: hidden;
   background-color: $fond;
   border-left: rgb(100, 20, 94);
-  width: 700px;
+  width: 500px;
   border-radius: 10px;
   margin: 16px;
   text-decoration: none;
   color: white;
   padding: 5px;
+
+    button {
+      background-color: transparent;
+      border: none;
+      color: rgb(141, 141, 141);
+      font-size: 20px;
+      cursor: pointer;
+      width: 50px;
+
+      &:hover {
+        color: lighten($purple, 10%);
+
+      }
+    }
+
 }
 
 .card > img {

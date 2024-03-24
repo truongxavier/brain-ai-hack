@@ -1,7 +1,7 @@
-<div class="d-flex show-node node">
+<div class="d-flex show-node">
   <%= render 'shared/sidebar', node: @nodenew %>
 
-  <div class="container node"
+  <div class="node"
         data-controller="node-subscription"
         data-node-subscription-node-id-value="<%= @node.id %>">
     <h1><%= @node.title %></h1>
@@ -15,6 +15,9 @@
       <%= render 'prompts/submarine' %>
     </div>
     <div class="input-prompt">
+      <div class="patience magictime d-none" data-node-subscription-target="patience">
+        <%= render 'prompts/submarine' %>
+      </div>
       <%= render 'prompts/prompt_input',  node: @node, prompt: @prompt, nodenew: @nodenew %>
     </div>
   </div>

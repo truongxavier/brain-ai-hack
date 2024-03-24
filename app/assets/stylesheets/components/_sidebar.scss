@@ -11,6 +11,10 @@
   padding-top: 60px;
   white-space: nowrap;
   transition: 0.5s;
+
+    .active {
+      color: $purple;
+    }
   }
 
 .sidebar a {
@@ -40,12 +44,16 @@ margin-right: 30px;
   font-size: 20px;
   color: rgb(141, 141, 141);
   display: block;
-  button {
+    button {
     background-color: transparent;
     border: none;
-    color: rgb(141, 141, 141); /* Couleur du texte */
+    color: rgb(141, 141, 141);
     font-size: 20px;
     cursor: pointer;
+
+    &:hover {
+      color: white;
+    }
   }
 
 }

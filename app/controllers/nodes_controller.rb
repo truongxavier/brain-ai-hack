@@ -5,33 +5,9 @@ class NodesController < ApplicationController
     @node = Node.new
     @visnode = []
     @visedge = []
-    @nodes.each do |node|
-      @visnode.push({ id: node.id,
-                      label: ajouter_saut_ligne_tous_les_n_mots(garder_les_n_mots(node.title,15),5),
-                      title: ajouter_saut_ligne_tous_les_n_mots(node.title, 20),
-                      shape: "box",
-                      level: 0 })
-      node.prompts.each do |prompt|
-        if prompt.response_text
-          @visnode.push({ id: prompt.id,
-                          label: "#{prompt.ai_class.name} répond \n #{ajouter_saut_ligne_tous_les_n_mots(garder_les_n_mots(prompt.response_text, 15),5)}",
-                          title: prompt.response_text,
-                          shape: "ellipse",
-                          font: '12px',
-                          level: 3 })
-        else
-          @visnode.push({ id: prompt.id,
-                          label: "#{prompt.ai_class.name} répond à \n #{ajouter_saut_ligne_tous_les_n_mots(garder_les_n_mots(prompt.prompt,15),5)}",
-                          image: "#{ENV['CLOUDINARY_LINK']}#{prompt.response_image.key}.png",
-                          shape: "image",
-                          size: 100,
-                          font: '12px',
-                          title: ajouter_saut_ligne_tous_les_n_mots(prompt.prompt,20),
-                          level: 3 })
-        end
-        @visedge.push({ from: node.id, to: prompt.id })
-      end
-    end
+    return if @nodes.empty?
+
+    construct_vis_data
   end
 
   def create
@@ -63,6 +39,53 @@ class NodesController < ApplicationController
   end
 
   private
+
+  def construct_node_for_vise(node)
+    @visnode.push({
+                    id: node.id,
+                    label: ajouter_saut_ligne_tous_les_n_mots(garder_les_n_mots(node.title, 15), 5),
+                    title: ajouter_saut_ligne_tous_les_n_mots(node.title, 20),
+                    shape: "box",
+                    level: 0
+                  }
+                )
+  end
+
+  def construct_prompt_text_for_vise(prompt)
+    @visnode.push({
+                    id: prompt.id,
+                    label: "#{prompt.ai_class.name} répond \n #{ajouter_saut_ligne_tous_les_n_mots(garder_les_n_mots(prompt.response_text, 15), 5)}",
+                    title: prompt.response_text,
+                    shape: "ellipse",
+                    font: '12px',
+                    level: 3})
+  end
+
+  def construct_prompt_image_for_vise(prompt)
+    @visnode.push({
+                    id: prompt.id,
+                    label: "#{prompt.ai_class.name} répond à \n #{ajouter_saut_ligne_tous_les_n_mots(garder_les_n_mots(prompt.prompt, 15), 5)}",
+                    image: "#{ENV.fetch('CLOUDINARY_LINK')}#{prompt.response_image.key}.png",
+                    shape: "image",
+                    size: 100,
+                    font: '12px',
+                    title: ajouter_saut_ligne_tous_les_n_mots(prompt.prompt, 20),
+                    level: 3})
+  end
+
+  def construct_vis_data
+    @nodes.each do |node|
+      construct_node_for_vise(node)
+      node.prompts.each do |prompt|
+        if prompt.response_text
+          construct_prompt_text_for_vise(prompt)
+        else
+          construct_prompt_image_for_vise(prompt)
+        end
+        @visedge.push({ from: node.id, to: prompt.id })
+      end
+    end
+  end
 
   def set_node
     @node = Node.find(params[:id])

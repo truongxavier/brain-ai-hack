@@ -4,7 +4,7 @@ import { createConsumer } from "@rails/actioncable"
 // Connects to data-controller="node-subscription"
 export default class extends Controller {
   static values = { nodeId: Number }
-  static targets = ["prompts", "patience", "zone"]
+  static targets = ["prompts", "patience", "zone","promptp"]
 
   connect() {
     console.log(this.element)
@@ -14,6 +14,7 @@ export default class extends Controller {
       { received: data => this.#insertPromptAndScrollDown(data) }
     )
     this.zoneTarget.addEventListener('input', this.resize)
+    this.#donw()
   }
 
   resetForm(event) {
@@ -34,6 +35,22 @@ export default class extends Controller {
     this.#donw()
   }
 
+  copy(event) {
+    var textId = event.currentTarget.dataset.textId
+    console.log(textId)
+    var textElement = this.promptpTargets.find(element => element.id === textId)
+    console.log(textElement)
+
+    /* Sélectionnez le texte */
+    var range = document.createRange();
+    range.selectNode(textElement);
+    window.getSelection().removeAllRanges();
+    window.getSelection().addRange(range);
+
+    /* Copiez le texte */
+    document.execCommand("copy");
+  }
+
   disconnect() {
     console.log("Unsubscribed from the node")
     this.channel.unsubscribe()
@@ -43,10 +60,10 @@ export default class extends Controller {
   #insertPromptAndScrollDown(data) {
     this.promptsTarget.insertAdjacentHTML("beforeend", data)
     this.#donw()
-    // window.scrollTo(0, document.body.scrollHeight)
   }
 
   #donw() {
-    window.scrollTo(0, 20000)
+    //window.scrollTo(0, 20000)
+    window.scrollTo(0, document.body.scrollHeight)
   }
 }
