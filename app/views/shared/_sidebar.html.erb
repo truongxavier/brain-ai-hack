@@ -10,6 +10,9 @@
   <div class="icondiv">
     <%= simple_form_for [ node ] do |f|  %>
       <%= f.input :title, as: :hidden %>
+      <%= f.simple_fields_for :non_model_field do |nmf| %>
+        <%= nmf.input :redirect, as: :hidden, input_html: { value: 'show' } %>
+      <% end %>
       <div class="submit">
         <%= button_to type: "submit" do  %>
           <i class="fa-solid fa-terminal"></i>Prompt
