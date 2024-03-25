@@ -14,10 +14,15 @@ class NodesController < ApplicationController
   end
 
   def create
+    redirect = params[:node][:non_model_field][:redirect]
     @node = Node.new(node_params)
     @node.user = current_user
     if @node.save!
-      redirect_to node_path(@node)
+      if redirect == 'index'
+        redirect_to nodes_path
+      else
+        redirect_to node_path(@node)
+      end
     else
       render :index, status: :unprocessable_entity
     end

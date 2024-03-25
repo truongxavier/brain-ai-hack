@@ -13,8 +13,11 @@
   <div class="icondiv sidebare-button <%= !current_page?(controller: "nodes", action: "index") && !current_page?(root_path) ? 'active' : ''%>"  data-action="click->sidebar#changeColor"  data-action="submit->button#changeColor">
     <%= simple_form_for [ node ] do |f|  %>
       <%= f.input :title, as: :hidden %>
+      <%= f.simple_fields_for :non_model_field do |nmf| %>
+        <%= nmf.input :redirect, as: :hidden, input_html: { value: 'show' } %>
+      <% end %>
       <div class="submit" data-sidebar-target="btn">
-        <%= button_to type: "submit", class: "button2" do  %>
+        <%= button_to type: "submit" class: "button2" do  %>
           <i class="fa-solid fa-terminal"></i>Prompt
         <% end %>
       </div>

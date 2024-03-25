@@ -11,15 +11,18 @@ export default class extends Controller {
    * @type {Object}
    * @static
    */
+  static targets = ["forminsert", "formedit", "map", "button", "buttonedit", "simpleForm"]
   static values = { node: Array, edge: Array }
 
   /**
    * Connects the mindmap controller.
    */
   connect() {
+    console.log(this.formTarget)
+    console.log(this.mapTarget)
     const nodes = new vis.DataSet(this.nodeValue);
     const edges = new vis.DataSet(this.edgeValue);
-    const container = this.element;
+    const container = this.mapTarget;
     const data = {
       nodes: nodes,
       edges: edges
@@ -49,19 +52,7 @@ export default class extends Controller {
           sortMethod: "directed",
         },
       },
-      manipulation: {
-        enabled: true,
-        initiallyActive: false,
-        addNode: true,
-        addEdge: true,
-        editNode: undefined,
-        editEdge: true,
-        deleteNode: true,
-        deleteEdge: true,
-        controlNodeStyle:{
-          // all node options are valid.
-        }
-      },
+
       physics: {
         hierarchicalRepulsion: {
           avoidOverlap: 300,
@@ -81,10 +72,10 @@ export default class extends Controller {
       edges: {
         arrows: "to",
       },
-    }
+    };
 
     var nodenetwork = new vis.Network(container, data, options);
-
+    const form = this.simpleFormTarget;
     /**
      * Event listener for double click on nodes.
      * @param {Object} params - The event parameters.
@@ -95,5 +86,36 @@ export default class extends Controller {
         window.location.href = `/nodes/${nodeId}`;
       }
     });
+
+    nodenetwork.on("click", function (params) {
+      if (params.nodes.length > 0) {
+        var nodeId = params.nodes[0];
+        console.log(nodeId);
+        console.log(form);
+        form.action = `/nodes/${nodeId}`;
+        form.method = "patch";
+      }
+    });
   }
+
+  addNode(event) {
+    event.target.classList.toggle("d-none")
+    this.forminsertTarget.classList.toggle("d-none")
+  }
+
+  display() {
+    this.forminsertTarget.classList.toggle("d-none")
+    this.buttonTarget.classList.toggle("d-none")
+  }
+
+  editNode(event) {
+    event.target.classList.toggle("d-none")
+    this.formeditTarget.classList.toggle("d-none")
+  }
+
+  displayedit() {
+    this.formeditTarget.classList.toggle("d-none")
+    this.buttonTarget.classList.toggle("d-none")
+  }
+
 }
