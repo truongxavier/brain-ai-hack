@@ -8,6 +8,8 @@ class NodesController < ApplicationController
     if params[:query].present?
       search = "title ILIKE :query"
       @nodes = @nodes.where(search, query: "%#{params[:query]}%")
+    else
+      @nodes = Node.all
     end
     return if @nodes.empty?
     construct_vis_data

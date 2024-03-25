@@ -3,7 +3,7 @@ import { Controller } from "@hotwired/stimulus"
 // Connects to data-controller="sidebar"
 export default class extends Controller {
   static values = {mini: Boolean, controller: String, action: String}
-  static targets = [ "btn", "sbm" ]
+  static targets = [ "btn" ]
 
   toggleSidebar() {
     this.miniValue = !this.miniValue
@@ -23,13 +23,9 @@ export default class extends Controller {
     if (this.controllerValue == "nodes" && this.actionValue == "index") {
       this.btnTarget.classList.add("active");
       this.btnTarget.classList.add("sidebare-button");
-      this.sbmTarget.classList.remove("active");
-      this.sbmTarget.classList.remove("sidebare-button");
     } else {
       this.btnTarget.classList.remove("active");
       this.btnTarget.classList.remove("sidebare-button");
-      this.sbmTarget.classList.add("active");
-      this.sbmTarget.classList.add("sidebare-button");
     }
   }
 }
