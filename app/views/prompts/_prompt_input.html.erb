@@ -1,14 +1,14 @@
 <div class="container form-prompt" >
   <%= simple_form_for [ node, prompt ],
         html: { data: { action: "turbo:submit-end->node-subscription#resetForm" } } do |f|  %>
-    <div class="row d-flex">
+    <div class="row d-flex" >
       <%= f.simple_fields_for :non_model_field do |nmf| %>
         <div class="col-3">
           <%= nmf.input :choix,
               label: "Choix du type de résultat",
               as: :string,
               as: :radio_buttons,
-              input_html: { class: "tag-selector" },
+              input_html: { class: "tag-selector", data: { action: "click->node-subscription#toggle" }},
               item_wrapper_class: 'tag-item',
               collection: ["image","texte"] %>
         </div>
@@ -19,7 +19,7 @@
               as: :check_boxes,
               collection_wrapper_tag: 'div',
               collection_wrapper_class: 'category-wrapper',
-              input_html: {class: 'category-selector'},
+              input_html: {class: 'category-selector', data: { node_subscription_target: "ia" }},
               collection: ["ChatGPT","MistralAi","Dezgo","DeepAi"] %>
         </div>
       <% end %>
