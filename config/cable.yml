@@ -7,4 +7,4 @@ test:
 production:
   adapter: redis
   url: <%= ENV.fetch("REDISCLOUD_URL") { "redis://localhost:6379/1" } %>
-  channel_prefix: brain_ai_hack_production
+  channel_prefix: brain_ai_hack2_production
