@@ -1,7 +1,20 @@
 <div class="d-flex node">
   <%= render 'shared/sidebar' ,node: @node %>
-  <div>
-    <h1>Mon classement</h1>
+  <div >
+    <h1 class="d-flex justify-content-center"  style="margin-top: 40px; margin-bottom: 30px;">Mon classement</h1>
+      <div >
+      <div class="row justify-content-center">
+        <div class="col-sm-8 my-3">
+          <%= form_with url: nodes_path, method: :get, class: "d-flex", id:"form-search" do %>
+            <%= text_field_tag :query,
+                  params[:query],
+                  class: "form-control",
+                  placeholder: ""
+              %>
+            <%= submit_tag "Recherche", name: "", class: "btn btn-primary" %>
+          <% end %>
+        </div>
+      </div>
     <%= render 'nodes/mindmap',visnode: @visnode, visedge: @visedge, node: @node %>
   </div>
 </div>
