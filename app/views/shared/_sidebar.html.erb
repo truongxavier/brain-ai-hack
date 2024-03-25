@@ -1,25 +1,28 @@
 <div data-controller="sidebar"
      id="mySidebar"
      class="sidebar"
-     data-action="mouseover->sidebar#toggleSidebar mouseout->sidebar#toggleSidebar" >
-  <div class="icondiv">
+     data-sidebar-controller-value = <%= controller_name %>
+     data-sidebar-action-value = <%= action_name %>
+     data-action="mouseover->sidebar#toggleSidebar mouseout->sidebar#toggleSidebar">
+
+  <div class="icondiv sidebare-button <%= current_page?(root_path) ? 'active' : ''%>"  data-action="click->sidebar#changeColor" >
     <%= link_to root_path do %>
       <i class="fa-solid fa-house"></i>Home
     <% end %>
   </div>
-  <div class="icondiv">
+  <div class="icondiv sidebare-button <%= !current_page?(controller: "nodes", action: "index") && !current_page?(root_path) ? 'active' : ''%>"  data-action="click->sidebar#changeColor"  data-action="submit->button#changeColor">
     <%= simple_form_for [ node ] do |f|  %>
       <%= f.input :title, as: :hidden %>
-      <div class="submit">
-        <%= button_to type: "submit" do  %>
+      <div class="submit" data-sidebar-target="btn">
+        <%= button_to type: "submit", class: "button2" do  %>
           <i class="fa-solid fa-terminal"></i>Prompt
         <% end %>
       </div>
     <% end %>
   </div>
   <br>
-  <div class="icondiv">
-    <%= link_to nodes_path do %>
+  <div class="icondiv sidebare-button <%= current_page?(controller: "nodes", action: "index") ? 'active' : ''%>" data-sidebar_target="btn">
+    <%= link_to nodes_path, data: {action: "click->sidebar#changeColor"} do %>
     <i class="fa-solid fa-folder"></i>classement
     <% end %>
   </div>

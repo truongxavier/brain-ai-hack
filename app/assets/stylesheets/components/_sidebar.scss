@@ -5,17 +5,39 @@
   z-index: 1;
   top: 40px;
   left: 0;
-  background: rgb(102,20,95);
+  background: $fond;
   background: linear-gradient(310deg, rgba(102, 20, 95, 1) 0%, rgba(2,0,36,1) 25%);
   overflow-x: hidden;
   padding-top: 60px;
   white-space: nowrap;
   transition: 0.5s;
 
-    .active {
-      color: $purple;
+  .active {
+    color: lighten($purple, 20%);
+
+    .button {
+      color: lighten($purple, 20%) ;
+      background-color: rgba(150, 150, 150, 0.082);
+      border-radius: 25px;
     }
+    .submit {
+      color: lighten($purple, 20%);
+      background-color: rgba(150, 150, 150, 0.082);
+      border-radius: 25px;
+      button {
+        color: lighten($purple, 20%);
+
+        border-radius: 25px;
+        }
+    }
+    a {
+      color: lighten($purple, 20%);
+      background-color: rgba(150, 150, 150, 0.082);
+      border-radius: 25px;
+      }
+
   }
+}
 
 .sidebar a {
   padding: 8px 8px 8px 32px;
@@ -53,6 +75,7 @@ margin-right: 30px;
 
     &:hover {
       color: white;
+      border-radius: 25px;
     }
   }
 
@@ -64,7 +87,7 @@ margin-right: 30px;
 
 .icondiv:hover {
   // box-shadow: 3px 5px 15px rgb(83, 83, 83);
-  border-radius: 10px;
-  background-color: rgba(150, 150, 150, 0.493);
+  border-radius: 25px;
+  background-color: rgba(150, 150, 150, 0.082);
   color: white;
 }

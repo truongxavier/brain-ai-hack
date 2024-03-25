@@ -5,8 +5,11 @@ class NodesController < ApplicationController
     @node = Node.new
     @visnode = []
     @visedge = []
+    if params[:query].present?
+      search = "title ILIKE :query"
+      @nodes = @nodes.where(search, query: "%#{params[:query]}%")
+    end
     return if @nodes.empty?
-
     construct_vis_data
   end
 
