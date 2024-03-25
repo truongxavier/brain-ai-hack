@@ -20,12 +20,14 @@ export default class extends Controller {
   resetForm(event) {
     this.patienceTarget.classList.add("d-none")
     this.patienceTarget.classList.remove("tinRightOut")
+    this.promptsTarget.classList.add("cards-padding")
     event.target.reset()
   }
 
   research(event) {
     this.patienceTarget.classList.remove("d-none")
     this.patienceTarget.classList.add("tinRightOut")
+    this.promptsTarget.classList.remove("cards-padding")
     this.#donw()
   }
 
