@@ -4,7 +4,7 @@ import { createConsumer } from "@rails/actioncable"
 // Connects to data-controller="node-subscription"
 export default class extends Controller {
   static values = { nodeId: Number }
-  static targets = ["prompts", "patience", "zone","promptp"]
+  static targets = ["prompts", "patience", "zone","promptp", "ia"]
 
   connect() {
     console.log(this.element)
@@ -20,12 +20,14 @@ export default class extends Controller {
   resetForm(event) {
     this.patienceTarget.classList.add("d-none")
     this.patienceTarget.classList.remove("tinRightOut")
+    this.promptsTarget.classList.add("cards-padding")
     event.target.reset()
   }
 
   research(event) {
     this.patienceTarget.classList.remove("d-none")
     this.patienceTarget.classList.add("tinRightOut")
+    this.promptsTarget.classList.remove("cards-padding")
     this.#donw()
   }
 
@@ -65,5 +67,17 @@ export default class extends Controller {
   #donw() {
     //window.scrollTo(0, 20000)
     window.scrollTo(0, document.body.scrollHeight)
+  }
+
+  toggle(event) {
+    const imageIa = this.iaTargets.filter( (ia) => ia.value === "Dezgo" || ia.value === "DeepAi" )
+    const textIa = this.iaTargets.find( (ia) => ia.value === "MistralAi" )
+    if (event.currentTarget.value == "texte") {
+        imageIa.forEach( (ia) => ia.setAttribute("disabled", " "));
+        textIa.removeAttribute("disabled");
+    } else {
+      imageIa.forEach( (ia) => ia.removeAttribute("disabled"));
+      textIa.setAttribute("disabled", " ");
+    }
   }
 }
