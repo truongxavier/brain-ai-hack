@@ -8,6 +8,7 @@ export default class extends Controller {
 
   connect() {
     console.log(this.element)
+    console.log(this.iaTarget)
     console.log(`Subscribed to the chatroom with the id ${this.nodeIdValue}.`)
     this.channel = createConsumer().subscriptions.create(
       { channel: "NodeChannel", id: this.nodeIdValue },
@@ -15,6 +16,15 @@ export default class extends Controller {
     )
     this.zoneTarget.addEventListener('input', this.resize)
     this.#donw()
+    if (this.iaTarget.value === "ChatGPT") {
+    this.iaTarget.classList.add("chatgpt")
+  } else if (this.iaTarget.value === "MistralAi") {
+    this.iaTarget.classList.add("mistralai")
+  } else if (this.iaTarget.value === "Dezgo") {
+    this.iaTarget.classList.add("dezgo")
+  } else if (this.iaTarget.value === "DeepAi") {
+    this.iaTarget.classList.add("deepai")
+  }
   }
 
   resetForm(event) {

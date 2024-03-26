@@ -26,6 +26,7 @@
   background-color: lighten($fond, 2%);
   color:  white;
   margin: 10px;
+  position: relative;
 }
 
 .category-selector:checked + label {
@@ -61,4 +62,32 @@
 #snippet_category_css:checked + label {
   background-color: #62DDF5;
   border-color: #62DDF5;
+}
+
+#prompt_non_model_field_list_ia_chatgpt + label::after {
+  content: url("https://res.cloudinary.com/dbdmgxxer/image/upload/c_scale,r_50,h_25,w_25/v1711461925/brain-ai-hack/ChatGPT_logo_z17ijx.png");
+  position: absolute;
+  right: 0px;
+  bottom: -6px;
+}
+
+#prompt_non_model_field_list_ia_mistralai + label::after {
+  content: url("https://res.cloudinary.com/dbdmgxxer/image/upload/c_scale,r_50,h_25,w_25/v1711461923/brain-ai-hack/Mistral_Ai_logo_pb07up.png");
+  position: absolute;
+  right: 0px;
+  bottom: -5px;
+}
+
+#prompt_non_model_field_list_ia_dezgo + label::after {
+  content: url("https://res.cloudinary.com/dbdmgxxer/image/upload/c_scale,r_50,h_25,w_25/v1711461928/brain-ai-hack/Dezgo_logo_zcveso.png");
+  position: absolute;
+  right: 0px;
+  bottom: -5px;
+}
+
+#prompt_non_model_field_list_ia_deepai + label::after {
+  content: url("https://res.cloudinary.com/dbdmgxxer/image/upload/c_scale,r_50,h_25,w_25/v1711461931/brain-ai-hack/DeepAi_logo_t2emkr.png");
+  position: absolute;
+  right: 0px;
+  bottom: -6px;
 }
