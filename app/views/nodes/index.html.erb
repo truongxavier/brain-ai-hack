@@ -17,6 +17,7 @@
           <%= f.input :title %>
           <%= f.simple_fields_for :non_model_field do |nmf| %>
             <%= nmf.input :redirect, as: :hidden, input_html: { value: 'index' } %>
+            <%= nmf.input :parent_id, as: :hidden, input_html: { data: { mindmap_target: "parent" } } %>
           <% end %>
           <%= f.submit "créer le node", class:"btn btn-primary"%>
         <% end %>
@@ -33,6 +34,6 @@
       </div>
     </div>
     <div class="mindmap" data-mindmap-target="map">
-    </div>  
+    </div>
   </div>
 </div>

@@ -17,8 +17,10 @@ class NodesController < ApplicationController
 
   def create
     redirect = params[:node][:non_model_field][:redirect]
+    parent_id = params[:node][:non_model_field][:parent_id]
     @node = Node.new(node_params)
     @node.user = current_user
+    @node.parent_id = parent_id
     if @node.save!
       if redirect == 'index'
         redirect_to nodes_path
@@ -86,6 +88,9 @@ class NodesController < ApplicationController
   def construct_vis_data
     @nodes.each do |node|
       construct_node_for_vise(node)
+      if node.parent_id
+        @visedge.push({ from: node.parent_id, to: node.id })
+      end
       node.prompts.each do |prompt|
         if prompt.response_text
           construct_prompt_text_for_vise(prompt)

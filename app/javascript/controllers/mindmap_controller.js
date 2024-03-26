@@ -11,7 +11,7 @@ export default class extends Controller {
    * @type {Object}
    * @static
    */
-  static targets = ["forminsert", "formedit", "map", "button", "buttonedit", "simpleForm"]
+  static targets = ["forminsert", "formedit", "map", "button", "buttonedit", "simpleForm", "parent"]
   static values = { node: Array, edge: Array }
 
   /**
@@ -76,6 +76,7 @@ export default class extends Controller {
 
     var nodenetwork = new vis.Network(container, data, options);
     const form = this.simpleFormTarget;
+    const parent = this.parentTarget;
     /**
      * Event listener for double click on nodes.
      * @param {Object} params - The event parameters.
@@ -94,6 +95,7 @@ export default class extends Controller {
         console.log(form);
         form.action = `/nodes/${nodeId}`;
         form.method = "patch";
+        parent.value = nodeId;
       }
     });
   }
