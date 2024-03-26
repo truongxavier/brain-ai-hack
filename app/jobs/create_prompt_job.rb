@@ -1,72 +1,34 @@
 require 'open-uri'
+require_relative '../models/prompt'
+require_relative '../channels/node_channel'
 
-class PromptsController < ApplicationController
+class CreatePromptJob < ApplicationJob
+  queue_as :default
 
-
-  def create
-    list_ia = params[:prompt][:non_model_field][:list_ia]
-    choix = params[:prompt][:non_model_field][:choix]
-    prompt_text = params[:prompt][:prompt]
-    @node = Node.find(params[:node_id])
-    if ENV.fetch('USE_JOB')
-      traite_prompt_job(list_ia, prompt_text, choix)
+  def perform(job_params)
+    controller = ActionController::Base.new()
+    puts job_params[:prompt_text]
+    puts job_params[:name_ai]
+    puts job_params[:choix]
+    puts job_params[:node]
+    @prompt = Prompt.new(job_params[:job_prompt_params])
+    @node = job_params[:node]
+    prepare_prompt(job_params[:name_ai])
+    node_title_save(job_params[:prompt_text])
+    puts job_params[:choix]
+    if job_params[:choix] == "texte"
+      prepare_response_text(job_params[:prompt_text], job_params[:name_ai])
     else
-      traite_prompt(list_ia, prompt_text, choix)
+      prepare_response_image(job_params[:prompt_text], job_params[:name_ai])
     end
+    prompt_save_and_broadcast(controller)
   end
 
   private
 
-  def traite_prompt(list_ia, prompt_text, choix)
-    list_ia.each do |name_ai|
-      next if name_ai == ""
-
-      prepare_prompt(name_ai)
-      node_title_save(prompt_text)
-      if choix == "texte"
-        prepare_response_text(prompt_text, name_ai)
-      else
-        prepare_response_image(prompt_text, name_ai)
-      end
-      prompt_save_and_broadcast
-    end
-  end
-
-  def traite_prompt_job(list_ia, prompt_text, choix)
-    list_ia.each do |name_ai|
-      next if name_ai == ""
-
-      job_prompt_params = prompt_params
-      job_params = {
-        name_ai:, node: @node,
-        prompt_text:, choix:,
-        job_prompt_params:
-      }
-      CreatePromptJob.perform_later(job_params)
-      head :ok
-    end
-  end
-
-  def prompt_params
-    params.require(:prompt).permit(:prompt)
-  end
-
   def prepare_prompt(name_ai)
-    @prompt = Prompt.new(prompt_params)
     @prompt.node = @node
     @prompt.ai_class = AiClass.find_by(name: name_ai)
-  end
-
-  def prompt_save_and_broadcast
-    if @prompt.save!
-      NodeChannel.broadcast_to(
-        @node,
-        render_to_string(partial: "prompt", locals: { prompt: @prompt })
-      )
-      head :ok
-    else
-      render "nodes/show", status: :unprocessable_entity
-    end
   end
 
   def node_title_save(prompt_text)
@@ -125,5 +87,18 @@ class PromptsController < ApplicationController
       filename: "#{garder_les_n_mots(prompt_text, 10).gsub(' ', '')}.png",
       content_type: "image/png"
     )
+  end
+
+  def prompt_save_and_broadcast(controller)
+    if @prompt.save!
+      html_string = controller.render_to_string(partial: "prompts/prompt", locals: { prompt: @prompt })
+      puts html_string
+      puts @node.id
+      # binding.pry
+      NodeChannel.broadcast_to(
+        @node,
+        html_string
+      )
+    end
   end
 end
