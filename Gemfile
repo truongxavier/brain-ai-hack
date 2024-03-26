@@ -55,7 +55,7 @@ gem "redis-rails"
 gem "ruby-openai"
 gem "sidekiq", "7.2.2"
 gem "sidekiq-failures"
-gem 'redis'
+
 
 
 
