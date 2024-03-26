@@ -6,8 +6,8 @@ class NodesController < ApplicationController
     @visnode = []
     @visedge = []
     if params[:query].present?
-      search = "title ILIKE :query"
-      @nodes = @nodes.where(search, query: "%#{params[:query]}%")
+      search = "title ILIKE :query OR prompts.prompt ILIKE :query OR prompts.response_text ILIKE :query"
+      @nodes = @nodes.joins(:prompts).where(search, query: "%#{params[:query]}%").distinct
     else
       @nodes = Node.all
     end
