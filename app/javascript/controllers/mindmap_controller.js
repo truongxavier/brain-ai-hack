@@ -70,7 +70,9 @@ export default class extends Controller {
         stabilization: { iterations: 150 },
       },
       edges: {
+        color: "#1a3096",
         arrows: "to",
+        width: 2,
       },
     };
 

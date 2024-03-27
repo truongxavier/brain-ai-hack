@@ -58,7 +58,8 @@ class NodesController < ApplicationController
                     label: ajouter_saut_ligne_tous_les_n_mots(garder_les_n_mots(node.title, 15), 5),
                     title: ajouter_saut_ligne_tous_les_n_mots(node.title, 20),
                     shape: "box",
-                    level: 0
+                    level: 0,
+                    color: "#1a3096"
                   }
                 )
   end
@@ -68,9 +69,10 @@ class NodesController < ApplicationController
                     id: prompt.id,
                     label: "#{prompt.ai_class.name} répond \n #{ajouter_saut_ligne_tous_les_n_mots(garder_les_n_mots(prompt.response_text, 15), 5)}",
                     title: prompt.response_text,
-                    shape: "ellipse",
+                    shape: "box",
                     font: '12px',
-                    level: 3})
+                    level: 3,
+                    color: "#0a5f5f" })
   end
 
   def construct_prompt_image_for_vise(prompt)
@@ -82,7 +84,7 @@ class NodesController < ApplicationController
                     size: 100,
                     font: '12px',
                     title: ajouter_saut_ligne_tous_les_n_mots(prompt.prompt, 20),
-                    level: 3})
+                    level: 3 })
   end
 
   def construct_vis_data

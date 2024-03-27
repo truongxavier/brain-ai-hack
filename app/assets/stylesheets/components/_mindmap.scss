@@ -5,7 +5,17 @@
 }
 
 .mindmap {
-  width: 1700px;
-  height: 1000px;
+  width: 1800px;
+  height: 900px;
 }
 
+.vis-tooltip {
+  background: lighten($fond,2%) !important;
+  color: white !important;
+  padding: 10px 20px !important;
+  margin-top: 50px !important;
+  border-radius: 10px !important;
+  box-shadow: 0 0 8px $purple !important;
+  border: none !important;
+  font-size: 12px, !important;
+}
