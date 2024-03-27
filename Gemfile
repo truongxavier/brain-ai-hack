@@ -53,7 +53,7 @@ gem "sassc-rails"
 gem "cloudinary"
 gem "ruby-openai"
 gem "sidekiq-failures"
-# gem "sidekiq", "6.5.11
+gem "sidekiq", "6.5.11"
 gem "redis-rails"
 
 
@@ -76,7 +76,7 @@ group :development do
   # gem "spring"
   gem "pry-byebug"
   gem "error_highlight", ">= 0.4.0", platforms: [:ruby]
-  gem "sidekiq", "7.2.2"
+  # gem "sidekiq", "7.2.2"
 end
 
 
