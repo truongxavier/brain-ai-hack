@@ -1,36 +1,40 @@
 <div class="d-flex node">
   <%= render 'shared/sidebar' ,node: @node %>
   <div data-controller="mindmap" data-mindmap-node-value="<%= @visnode.to_json %>" data-mindmap-edge-value="<%= @visedge.to_json %>">
-    <div class="d-flex">
-      <h1>Mon classement</h1>
-      <%= form_with url: nodes_path, method: :get, class: "d-flex", id:"form-search" do %>
-        <%= text_field_tag :query,
-              params[:query],
-              class: "form-control",
-              placeholder: ""
-          %>
-        <%= submit_tag "Recherche", name: "", class: "btn btn-primary" %>
-      <% end %>
-      <button data-action="click->mindmap#addNode" class="btn btn-primary ms-5" data-mindmap-target="button">Ajouter un noeud</button>
-      <div class="d-none node-popUp" data-mindmap-target="forminsert">
-        <%= simple_form_for [@node] do |f|  %>
-          <%= f.input :title %>
-          <%= f.simple_fields_for :non_model_field do |nmf| %>
-            <%= nmf.input :redirect, as: :hidden, input_html: { value: 'index' } %>
-            <%= nmf.input :parent_id, as: :hidden, input_html: { data: { mindmap_target: "parent" } } %>
-          <% end %>
-          <%= f.submit "créer le node", class:"btn btn-primary"%>
+    <h1 class="m-3 text-center">Mon classement</h1>
+    <div class="d-flex justify-content-between">
+      <div>
+        <%= form_with url: nodes_path, method: :get, class: "d-flex", id:"form-search" do %>
+          <%= text_field_tag :query,
+                params[:query],
+                class: "form-control search",
+                placeholder: ""
+            %>
+          <%= submit_tag "Recherche", name: "", class: "btn btn-primary ms-3" %>
         <% end %>
       </div>
-      <button data-action="click->mindmap#editNode" class="btn btn-primary ms-5" data-mindmap-target="buttonedit">Editer un noeud</button>
-      <div class="d-none node-popUp" data-mindmap-target="formedit">
-        <%= simple_form_for [@node], html: { data: { mindmap_target: "simpleForm" } } do |f|  %>
-          <%= f.input :title %>
-          <%= f.simple_fields_for :non_model_field do |nmf| %>
-            <%= nmf.input :redirect, as: :hidden, input_html: { value: 'index' } %>
+      <div>
+        <button data-action="click->mindmap#addNode" class="btn btn-primary ms-5" data-mindmap-target="button">Ajouter un noeud</button>
+        <div class="d-none node-popUp" data-mindmap-target="forminsert">
+          <%= simple_form_for [@node] do |f|  %>
+            <%= f.input :title %>
+            <%= f.simple_fields_for :non_model_field do |nmf| %>
+              <%= nmf.input :redirect, as: :hidden, input_html: { value: 'index' } %>
+              <%= nmf.input :parent_id, as: :hidden, input_html: { data: { mindmap_target: "parent" } } %>
+            <% end %>
+            <%= f.submit "créer le node", class:"btn btn-primary"%>
           <% end %>
-          <%= f.submit "créer le node", class:"btn btn-primary"%>
-        <% end %>
+        </div>
+        <button data-action="click->mindmap#editNode" class="btn btn-primary ms-5" data-mindmap-target="buttonedit">Editer un noeud</button>
+        <div class="d-none node-popUp" data-mindmap-target="formedit">
+          <%= simple_form_for [@node], html: { data: { mindmap_target: "simpleForm" } } do |f|  %>
+            <%= f.input :title %>
+            <%= f.simple_fields_for :non_model_field do |nmf| %>
+              <%= nmf.input :redirect, as: :hidden, input_html: { value: 'index' } %>
+            <% end %>
+            <%= f.submit "créer le node", class:"btn btn-primary"%>
+          <% end %>
+        </div>
       </div>
     </div>
     <div class="mindmap" data-mindmap-target="map">
