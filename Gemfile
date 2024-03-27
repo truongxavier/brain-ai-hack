@@ -51,11 +51,13 @@ gem "font-awesome-sass", "~> 6.1"
 gem "simple_form", github: "heartcombo/simple_form"
 gem "sassc-rails"
 gem "cloudinary"
-gem "redis-rails"
 gem "ruby-openai"
-# gem "sidekiq", "6.5"
-gem "sidekiq-failures"
 
+# gem "sidekiq", "6.5.11"
+
+
+gem "sidekiq-failures"
+gem "redis-rails"
 
 
 group :development, :test do
