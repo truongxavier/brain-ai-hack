@@ -53,7 +53,7 @@ gem "sassc-rails"
 gem "cloudinary"
 gem "ruby-openai"
 gem "sidekiq-failures"
-gem "sidekiq", "6.5.11"
+gem "sidekiq", "6.5"
 gem "redis-rails"
 
 
