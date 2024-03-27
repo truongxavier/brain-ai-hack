@@ -52,12 +52,10 @@ gem "simple_form", github: "heartcombo/simple_form"
 gem "sassc-rails"
 gem "cloudinary"
 gem "ruby-openai"
-
-# gem "sidekiq", "6.5.11"
-
-
 gem "sidekiq-failures"
+# gem "sidekiq", "6.5.11
 gem "redis-rails"
+
 
 
 group :development, :test do
