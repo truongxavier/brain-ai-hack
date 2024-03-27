@@ -28,9 +28,9 @@ export default class extends Controller {
   }
 
   resetForm(event) {
-    this.patienceTarget.classList.add("d-none")
-    this.patienceTarget.classList.remove("tinRightOut")
-    this.promptsTarget.classList.add("cards-padding")
+    // this.patienceTarget.classList.add("d-none")
+    // this.patienceTarget.classList.remove("tinRightOut")
+    // this.promptsTarget.classList.add("cards-padding")
     event.target.reset()
   }
 
@@ -70,12 +70,15 @@ export default class extends Controller {
   }
 
   #insertPromptAndScrollDown(data) {
+    this.patienceTarget.classList.add("d-none")
+    this.patienceTarget.classList.remove("tinRightOut")
     this.promptsTarget.insertAdjacentHTML("beforeend", data)
+    this.promptsTarget.classList.add("cards-padding")
     this.#donw()
   }
 
   #donw() {
-    //window.scrollTo(0, 20000)
+    // window.scrollTo(0, 20000)
     window.scrollTo(0, document.body.scrollHeight)
   }
 
