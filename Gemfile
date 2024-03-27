@@ -53,7 +53,7 @@ gem "sassc-rails"
 gem "cloudinary"
 gem "redis-rails"
 gem "ruby-openai"
-gem "sidekiq", "6.5"
+# gem "sidekiq", "6.5"
 gem "sidekiq-failures"
 
 
@@ -76,7 +76,9 @@ group :development do
   # gem "spring"
   gem "pry-byebug"
   gem "error_highlight", ">= 0.4.0", platforms: [:ruby]
+  gem "sidekiq", "7.2.2"
 end
+
 
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
