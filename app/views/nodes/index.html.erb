@@ -10,7 +10,11 @@
                 class: "form-control search",
                 placeholder: ""
             %>
-          <%= submit_tag "Recherche", name: "", class: "btn btn-primary ms-3" %>
+            <div class="submit">
+              <%= button_to "", type: "submit" do %>
+                <i class="fa-solid fa-arrow-right"></i>
+              <% end %>
+            </div>
         <% end %>
       </div>
       <div>

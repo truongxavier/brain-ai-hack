@@ -54,20 +54,37 @@ body{
   border-radius: 10px;
 }
 
-.search {
-  color: white !important;
-  width: 500px;
-  box-shadow: 0 0 8px $purple;
-  border: rgb(100, 20, 94);
-  border-radius: 10px;
-  background-color: $fond !important;
-  margin-left: 2em;
+#form-search {
+
+  .search {
+    color: white !important;
+    width: 500px;
+    box-shadow: 0 0 8px $purple;
+    border: rgb(100, 20, 94);
+    border-radius: 10px;
+    background-color: $fond !important;
+    margin-left: 2em;
+  }
+
   .submit {
     padding: 5px 5px 5px 5px;
     text-decoration: none;
-    color: white;
     font-size: 20px;
+    color: $purple;
     display: block;
+    button {
+      background-color: transparent;
+      border: none;
+      color: $purple;
+      font-size: 30px;
+      cursor: pointer;
+
+      &:hover {
+        color: lighten($purple, 10%);
+
+      }
+    }
   }
 }
+
 @import "mindmap";
