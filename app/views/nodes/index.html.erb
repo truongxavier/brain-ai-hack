@@ -22,7 +22,7 @@
               <%= nmf.input :redirect, as: :hidden, input_html: { value: 'index' } %>
               <%= nmf.input :parent_id, as: :hidden, input_html: { data: { mindmap_target: "parent" } } %>
             <% end %>
-            <%= f.submit "créer le node", class:"btn btn-primary"%>
+            <%= f.submit "Créer le node", class:"btn btn-primary"%>
           <% end %>
         </div>
         <button data-action="click->mindmap#editNode" class="btn btn-primary ms-5" data-mindmap-target="buttonedit">Editer un noeud</button>
@@ -32,7 +32,7 @@
             <%= f.simple_fields_for :non_model_field do |nmf| %>
               <%= nmf.input :redirect, as: :hidden, input_html: { value: 'index' } %>
             <% end %>
-            <%= f.submit "créer le node", class:"btn btn-primary"%>
+            <%= f.submit "Modifier le node", class:"btn btn-primary"%>
           <% end %>
         </div>
       </div>

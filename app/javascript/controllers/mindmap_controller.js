@@ -27,7 +27,7 @@ export default class extends Controller {
       nodes: nodes,
       edges: edges
     };
-    const options = {
+    const options1 = {
       // configure: {
       //   enabled: true,
       //   filter: 'nodes,edges',
@@ -70,13 +70,56 @@ export default class extends Controller {
         stabilization: { iterations: 150 },
       },
       edges: {
-        color: "#1a3096",
+        color: "#aa610d",
         arrows: "to",
         width: 2,
       },
     };
 
-    var nodenetwork = new vis.Network(container, data, options);
+    const options2 = {
+      // configure: {
+      //   enabled: true,
+      //   filter: 'nodes,edges',
+      //   container: undefined,
+      //   showButton: true
+      // },
+      locale: 'fr',
+      nodes:{
+        color: '#64145e',
+        fixed: false,
+        physics: true,
+        font: '16px arial white',
+        shape: 'box',
+        scaling: {
+          label: true
+        },
+        shadow: true
+      },
+
+
+      physics: {
+
+        forceAtlas2Based: {
+          gravitationalConstant: -200,
+          centralGravity: 0.005,
+          springLength: 500,
+          springConstant: 0.18,
+          avoidOverlap: 1,
+        },
+        maxVelocity: 146,
+        solver: "forceAtlas2Based",
+        timestep: 0.35,
+        stabilization: { iterations: 50 },
+      },
+      edges: {
+        color: "#aa610d",
+        arrows: "to",
+        width: 2,
+      },
+    };
+
+
+    var nodenetwork = new vis.Network(container, data, options2);
     const form = this.simpleFormTarget;
     const parent = this.parentTarget;
     /**

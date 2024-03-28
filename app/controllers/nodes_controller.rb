@@ -59,7 +59,7 @@ class NodesController < ApplicationController
                     title: ajouter_saut_ligne_tous_les_n_mots(node.title, 20),
                     shape: "box",
                     level: 0,
-                    color: "#1a3096"
+                    color: "#aa610d"
                   }
                 )
   end
@@ -72,7 +72,7 @@ class NodesController < ApplicationController
                     shape: "box",
                     font: '12px',
                     level: 3,
-                    color: "#0a5f5f" })
+                    color: "#c9390e" })
   end
 
   def construct_prompt_image_for_vise(prompt)
