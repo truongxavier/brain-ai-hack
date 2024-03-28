@@ -1,7 +1,7 @@
 <div class="d-flex node">
   <%= render 'shared/sidebar' ,node: @node %>
   <div data-controller="mindmap" data-mindmap-node-value="<%= @visnode.to_json %>" data-mindmap-edge-value="<%= @visedge.to_json %>">
-    <h1 class="m-4 text-left">Mes Recherches</h1>
+    <h1 class="m-4 ms-4 text-left">Mes Recherches</h1>
     <div class="d-flex justify-content-between">
       <div>
         <%= form_with url: nodes_path, method: :get, class: "d-flex", id:"form-search" do %>
