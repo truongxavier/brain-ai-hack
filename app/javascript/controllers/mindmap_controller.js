@@ -100,16 +100,16 @@ export default class extends Controller {
       physics: {
 
         forceAtlas2Based: {
-          gravitationalConstant: -200,
-          centralGravity: 0.005,
+          gravitationalConstant: -300,
+          centralGravity: 0.002,
           springLength: 500,
           springConstant: 0.18,
           avoidOverlap: 1,
         },
-        maxVelocity: 146,
+        maxVelocity: 106,
         solver: "forceAtlas2Based",
-        timestep: 0.35,
-        stabilization: { iterations: 50 },
+        timestep: 0.25,
+        stabilization: { iterations: 10 },
       },
       edges: {
         color: "#aa610d",
